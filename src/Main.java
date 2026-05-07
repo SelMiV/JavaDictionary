@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.IOException;
+import java.util.InputMismatchException;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,7 +27,18 @@ public class Main {
 
             System.out.println("Тип словаря( 1 или 2)");
             DictionaryManager dictionaryManager = null;
-            switch (scanner.nextInt()) {
+
+            int choice;
+            try {
+                choice = scanner.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Введите число, а не буквы.");
+                scanner.nextLine();
+                continue;
+            }
+
+            switch (choice) {
                 case 1:
                     dictionaryManager = new DictionaryManagerForFistLg(fileName);
                     break;
@@ -52,8 +64,15 @@ public class Main {
                                     "6) Выход\n"
                     );
 
-                    switch (scanner.nextInt()) {
-
+                    try {
+                        choice = scanner.nextInt();
+                    }
+                    catch (InputMismatchException e) {
+                        System.out.println("Введите число, а не буквы.");
+                        scanner.nextLine();
+                        continue;
+                    }
+                    switch (choice) {
                         case 1: {
 
                             System.out.println("1) Содержимое:");
